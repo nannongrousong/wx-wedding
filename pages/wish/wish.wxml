@@ -6,7 +6,7 @@
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
-
+    <button open-type='openSetting' bindopensetting='bindSetting'>查看授权情况</button>
   </view>
   <view class='bottom-toolbar'>
     <view class='btn btn-lottery' bindtap='bindNavLottery'>

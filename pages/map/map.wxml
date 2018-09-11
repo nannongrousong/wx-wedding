@@ -2,7 +2,7 @@
 </map>
 
 <view class='bottom-toolbar'>
-  <view class='btn btn-back'>
+  <view class='btn btn-back' bindtap='bindBackhome'>
     <text class='fa fa-reply-all'></text>
     <text>返回</text>
   </view>

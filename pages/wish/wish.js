@@ -1,5 +1,3 @@
-//index.js
-//获取应用实例
 const app = getApp()
 
 Page({
@@ -8,14 +6,23 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
+  bindSetting: function(a, b, c) {
+  },
   bindNavLottery: function() {
     wx.navigateTo({
       url: '../lottery/lottery',
     })
   },
   bindNavSign: function() {
-    wx.navigateTo({
-      url: '../sign/sign',
+    wx.getLocation({
+      success: (res) => {
+        console.log('getLocation success', res);
+      },
+      fail: (res) => {
+        wx.showToast({
+          title: '请允许哦！',
+        })
+      }
     })
   },
   bindNavWish: function() {

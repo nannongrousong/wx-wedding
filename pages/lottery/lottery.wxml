@@ -1,2 +1,23 @@
-<!--pages/lottery/lottery.wxml-->
-<text>pages/lottery/lottery.wxml</text>
+<view class='lottery-tray'>
+  <view class='lottery-circle-small'>
+    <view class='lottery-square'></view>
+    <text class='start-lottery'>抽奖</text>
+  </view>
+
+  <view class='lottery-circle-big'>
+    <view wx:for="{{awardList}}">
+      <view class='tray-line' style='transform:rotate({{item.lineDeg}}deg)'></view>
+      <view class='tray-award' style='transform:rotate({{item.awardDeg}}deg)'>
+        <text class='fa fa-{{item.icon}} award-icon'></text>
+        <text class='award-describe'>{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='bottom-toolbar'>
+  <view class='btn btn-back' bindtap='bindBackhome'>
+    <text class='fa fa-reply-all'></text>
+    <text>返回</text>
+  </view>
+</view>
