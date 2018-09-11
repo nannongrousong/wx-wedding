@@ -4,7 +4,8 @@ Page({
   data: {
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    showAuthModal: false
   },
   bindSetting: function(a, b, c) {
   },
@@ -15,12 +16,13 @@ Page({
   },
   bindNavSign: function() {
     wx.getLocation({
+      type: 'gcj02',
       success: (res) => {
-        console.log('getLocation success', res);
+        
       },
       fail: (res) => {
-        wx.showToast({
-          title: '请允许哦！',
+        this.setData({
+          showAuthModal: true
         })
       }
     })

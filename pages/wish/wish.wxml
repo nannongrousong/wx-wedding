@@ -7,6 +7,8 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
     <button open-type='openSetting' bindopensetting='bindSetting'>查看授权情况</button>
+    <auth-modal hidden='{{!showAuthModal}}'>
+    </auth-modal>
   </view>
   <view class='bottom-toolbar'>
     <view class='btn btn-lottery' bindtap='bindNavLottery'>

@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "婚礼进行曲"
+  "navigationBarTitleText": "婚礼进行曲",
+  "usingComponents": {
+    "auth-modal": "/component/authModal/authModal"
+  }
 }

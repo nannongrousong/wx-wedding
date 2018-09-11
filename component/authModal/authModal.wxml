@@ -1,0 +1,18 @@
+<block wx:if="{{!hidden}}">
+  <view class='auth-modal'>
+    <view class='modal-mask'></view>
+    <view class='modal-body'>
+      <view class='modal-title'></view>
+      <view class='modal-content'>
+        <text>由于您之前拒绝过小程序使用位置功能</text>
+        <text>请点击确定重新启用</text>
+      </view>
+      <view class='modal-footer'>
+        <view class='oper-btns'>
+          <button bindtap='bindCancel' plain='true' class='cancel-btn'>取消</button>
+          <button bindopensetting='bindSetting' plain='true' open-type='openSetting' class='ok-btn'>确定</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
