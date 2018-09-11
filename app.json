@@ -1,0 +1,14 @@
+{
+  "pages":[
+    "pages/wish/wish",
+    "pages/lottery/lottery",
+    "pages/sign/sign",
+    "pages/map/map"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  }
+}

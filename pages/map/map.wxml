@@ -1,0 +1,9 @@
+<map class='hotel-map' latitude='32.0721630000' longitude='118.7988230000' markers='{{markers}}'>
+</map>
+
+<view class='bottom-toolbar'>
+  <view class='btn btn-back'>
+    <text class='fa fa-reply-all'></text>
+    <text>返回</text>
+  </view>
+</view>
