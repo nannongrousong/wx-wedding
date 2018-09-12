@@ -23,7 +23,9 @@ Page({
     barragepresentTop: 60,
     barrageInitLeft: 0
   },
-  bindSetting: function(a, b, c) {},
+  bindSetting: function(a, b, c) {
+
+  },
   bindNavLottery: function() {
     wx.navigateTo({
       url: '../lottery/lottery',
@@ -63,15 +65,8 @@ Page({
   },
   bindSendBarrage: function() {
     console.log('wish.bindSendBarrage')
-  },
+  }, 
   onLoad: function() {
-    setTimeout(() => {
-      wx.showToast({
-        image: '/image/app.jpg',
-        title: 'xxxxxxxxx',
-      })
-    }, 3000)
-
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

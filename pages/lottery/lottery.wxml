@@ -4,7 +4,7 @@
     <text class='start-lottery' bindtap='startLottery'>抽奖</text>
   </view>
 
-  <view class='lottery-circle-big' style='{{awardStyle}}'>
+  <view class='lottery-circle-big' style='{{awardStyle}}' bindtransitionend='bindEndCircle'>
     <view wx:for="{{awardList}}">
       <view class='tray-line' style='transform:rotate({{item.lineDeg}}deg)'></view>
       <view class='tray-award' style='transform:rotate({{item.awardDeg}}deg)'>
@@ -21,3 +21,6 @@
     <text>返回</text>
   </view>
 </view>
+
+<award-modal hidden='{{!showAwardModal}}' bindabandonaward='bindAbandonAward' bindsendaward='bindSendAward'>
+</award-modal>

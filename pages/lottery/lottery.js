@@ -1,16 +1,37 @@
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     awardList: [],
-    awardStyle: ''
+    awardStyle: '',
+    showAwardModal: false
   },
   bindBackhome: () => {
     wx.navigateTo({
       url: '../wish/wish',
     })
+  },
+  bindAbandonAward: function () {
+    this.setData({
+      showAwardModal: false
+    })
+  },
+  bindSendAward: function (e) {
+    const { phone } = e.detail;
+    console.log('bindSendAward.reamrk', phone)
+  },
+  bindEndCircle: function() {
+    let awardStr = wx.getStorageInfoSync('award');
+    wx.removeStorageSync('award')
+
+    let awardName = '', recordID = '';
+    if (awardStr != undefined) {
+      let awardInfo = JSON.parse(awardStr)
+      recordID = awardInfo.recordID;
+      awardName = awardInfo.name;
+    }
+
+    if (recordID != undefined && recordID != '') {
+      
+    }
   },
   startLottery: function() {
     console.log('startLottery')
@@ -22,28 +43,49 @@ Page({
         data: '',
         method: 'GET',
         success: (res) => {
-          const { data, statusCode } = res;
-          if(!data.Code) {
-            wx.showToast({
-              title: '今天的抽奖次数用完啦，请明天再来吧！',
+          const {
+            data: resData,
+            statusCode
+          } = res;
+          if (!resData.Code) {
+            wx.showModal({
+              content: resData.info,
+              showCancel: false
             })
             return;
           }
 
-          wx.request({
-            url: '/award/lottery',
-            success: (res) => {
-              const { data } = res;
-              if(!data.Code) {
-                
+          if (resData.data.canLottery) {
+            wx.showModal({
+              content: '今天的抽奖次数用完啦，请明天再来吧！',
+              showCancel: false
+            })
+          } else {
+            wx.request({
+              url: '/award/lottery',
+              success: (res) => {
+                const {
+                  data: resData
+                } = res;
+                if (!resData.Code) {
+                  wx.showModal({
+                    content: resData.info,
+                    showCancel: false
+                  })
+                  return;
+                }
+                console.log('我要转转：' + resData.data.deg);
+                wx.setStorageSync('award', JSON.stringify(resData.data.award))
+
+                const lastDeg = 360 * 10 + resData.data.deg;
+                this.setData({
+                  awardStyle: `transform: rotate(${lastDeg}deg);transition:transform 10s ease`
+                })
               }
-            }
-          })
+            })
+          }
         }
       })
-    })
-    this.setData({
-      awardStyle: 'transform: rotate(1000deg);transition: transform 10s ease'
     })
   },
   onLoad: function(options) {

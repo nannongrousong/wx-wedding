@@ -11,13 +11,14 @@
   <view class='barrage-wrapper'>
     <view wx:for="{{barrageList}}">
       <view class='barrage-item'>
-        <barrage barrageinfo='{{item}}' bindbarrageend='bindBarrageEnd'></barrage>
+        <barrage barrageinfo='{{item}}' bindbarrageend='bindBarrageEnd' ></barrage>
       </view>
     </view>
   </view>
 
   <auth-modal hidden='{{!showAuthModal}}'>
   </auth-modal>
+
   <view class='bottom-toolbar'>
     <block wx:if='{{barrageMode}}'>
       <view class='barrage-input-area'>

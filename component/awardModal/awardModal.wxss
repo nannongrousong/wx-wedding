@@ -1,0 +1,69 @@
+auth-modal {
+  width: 100%;
+}
+
+.auth-modal {
+  position: absolute;
+  width: 100%;
+  top: 20%;
+}
+
+.auth-modal .modal-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  height: 100%;
+  z-index: 1;
+}
+
+.auth-modal .modal-body {
+  margin: 0 50rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.auth-modal .modal-body .modal-title {
+  padding-top: 40rpx;
+}
+
+.auth-modal .modal-body .modal-content {
+  padding: 40rpx 40rpx 60rpx 40rpx;
+}
+
+.auth-modal .modal-body .modal-content .modal-content-input{
+  border: 1rpx solid rgba(236, 223, 223, 0.65);
+  padding: 5px 0;
+}
+
+.auth-modal .modal-body .modal-footer {
+}
+
+.auth-modal .modal-body .modal-footer button {
+  
+}
+
+.oper-btns {
+  display: flex;
+}
+
+.oper-btns button {
+  flex: 1;
+  border: none;
+  border-radius: 0;
+}
+
+.oper-btns .cancel-btn {
+  border-top: 0.5rpx solid #E6E6E6;
+}
+
+.oper-btns .ok-btn {
+  border-top: 0.5rpx solid #E6E6E6;
+  border-left: 0.5rpx solid #E6E6E6;
+  color: #3CC81E;
+}
