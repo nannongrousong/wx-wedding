@@ -1,10 +1,10 @@
 <view class='lottery-tray'>
   <view class='lottery-circle-small'>
     <view class='lottery-square'></view>
-    <text class='start-lottery'>抽奖</text>
+    <text class='start-lottery' bindtap='startLottery'>抽奖</text>
   </view>
 
-  <view class='lottery-circle-big'>
+  <view class='lottery-circle-big' style='{{awardStyle}}'>
     <view wx:for="{{awardList}}">
       <view class='tray-line' style='transform:rotate({{item.lineDeg}}deg)'></view>
       <view class='tray-award' style='transform:rotate({{item.awardDeg}}deg)'>

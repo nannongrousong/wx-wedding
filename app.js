@@ -32,8 +32,23 @@ App({
         }
       }
     })
+
+    //  获取页面高度和宽度
+    wx.getSystemInfo({
+      success: (res) => {
+        let {
+          windowHeight,
+          windowWidth
+        } = res;
+        this.globalData.windowInfo = {
+          windowHeight,
+          windowWidth
+        }
+      }
+    })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    windowInfo: null
   }
 })

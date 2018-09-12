@@ -1,4 +1,3 @@
-<!--index.wxml-->
 <view class="container">
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
@@ -7,26 +6,44 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
     <button open-type='openSetting' bindopensetting='bindSetting'>查看授权情况</button>
-    <auth-modal hidden='{{!showAuthModal}}'>
-    </auth-modal>
   </view>
+
+  <view class='barrage-wrapper'>
+    <view wx:for="{{barrageList}}">
+      <view class='barrage-item'>
+        <barrage barrageinfo='{{item}}' bindbarrageend='bindBarrageEnd'></barrage>
+      </view>
+    </view>
+  </view>
+
+  <auth-modal hidden='{{!showAuthModal}}'>
+  </auth-modal>
   <view class='bottom-toolbar'>
-    <view class='btn btn-lottery' bindtap='bindNavLottery'>
-      <text class='fa fa-gift'></text>
-      <text>抽奖</text>
-    </view>
-    <view class='btn btn-sign' bindtap='bindNavSign'>
-      <text class='fa fa-hand-peace-o'></text>
-      <text>签到</text>
-    </view>
-    <view class='btn btn-wish' bindtap='bindNavWish'>
-      <text class='fa fa-heart'></text>
-      <text>祝福</text>
-    </view>
-    <view class='btn btn-map' bindtap='bindNavMap'>
-      <text class='fa fa-map-marker'></text>
-      <text>地图</text>
-    </view>
+    <block wx:if='{{barrageMode}}'>
+      <view class='barrage-input-area'>
+        <text class='fa fa-navicon switch-button' bindtap='bindSwitchArea'></text>
+        <input class='barrage-input' placeholder='搞这玩意儿能找到女朋友吗？'></input>
+        <text class='fa fa-arrow-circle-right send-barrage' bindtap='bindSendBarrage'></text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class='btn btn-lottery' bindtap='bindNavLottery'>
+        <text class='fa fa-gift'></text>
+        <text>抽奖</text>
+      </view>
+      <view class='btn btn-sign' bindtap='bindNavSign'>
+        <text class='fa fa-hand-peace-o'></text>
+        <text>签到</text>
+      </view>
+      <view class='btn btn-wish' bindtap='bindNavWish'>
+        <text class='fa fa-heart'></text>
+        <text>祝福</text>
+      </view>
+      <view class='btn btn-map' bindtap='bindNavMap'>
+        <text class='fa fa-map-marker'></text>
+        <text>地图</text>
+      </view>
+    </block>
   </view>
   <view class='main-background'>
   </view>

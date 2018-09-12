@@ -1,0 +1,4 @@
+<view class='barrage-item' style='left:{{barrageinfo.left}}px;top:{{barrageinfo.top}}px;transform: {{transform}}' bindtransitionend='bindBarrageEnd'>
+  <image class='barrage-portrait' src='{{barrageinfo.portraitUrl}}'></image>
+  <text class='barrage-text' style='background-color:{{barrageinfo.bgColor}}'>{{barrageinfo.text}}</text>
+</view>

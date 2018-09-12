@@ -1,0 +1,32 @@
+.barrage-item {
+  position: fixed;
+  top: 100px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 4s linear;
+}
+
+.barrage-portrait {
+  position: relative;
+  width: 70rpx;
+  height: 70rpx;
+  vertical-align: middle;
+  border-radius: 50%;
+  border: 1rpx solid white;
+  z-index: 50;
+}
+
+.barrage-text {
+  position: relative;
+  vertical-align: middle;
+  padding: 4rpx 10rpx 4rpx 20rpx;
+  margin-left: -20rpx;
+  max-width: 400rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #F5F5F5;
+  border: 1rpx solid white;
+  border-radius: 15rpx;
+  z-index: 10;
+  opacity: 0.6;
+}

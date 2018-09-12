@@ -4,11 +4,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    awardList: []
+    awardList: [],
+    awardStyle: ''
   },
   bindBackhome: () => {
     wx.navigateTo({
       url: '../wish/wish',
+    })
+  },
+  startLottery: function() {
+    console.log('startLottery')
+    this.setData({
+      awardStyle: 'transform: rotate(1000deg);transition: transform 10s ease'
     })
   },
   onLoad: function(options) {

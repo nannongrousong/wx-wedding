@@ -47,3 +47,38 @@
 .btn-map {
   background: #4caf50;
 }
+
+.barrage-input-area {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rpx;
+}
+
+.switch-button {
+  font-size: 1.6em;
+  flex: 0 0 10%;
+  text-align: center;
+  color: rgb(148, 148, 148);
+}
+
+.send-barrage {
+  font-size: 1.6em;
+  flex: 0 0 10%;
+  text-align: center;
+  color: rgb(148, 148, 148);
+}
+
+.barrage-input {
+  flex: 1;
+  border-radius: 10rpx;
+  padding: 10rpx;
+  margin: 0 5rpx;
+  border: 1rpx solid grey;
+}
+
+.barrage-wrapper {
+  position: relative;
+  z-index: 100;
+}
