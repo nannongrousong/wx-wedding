@@ -65,6 +65,13 @@ Page({
     console.log('wish.bindSendBarrage')
   },
   onLoad: function() {
+    setTimeout(() => {
+      wx.showToast({
+        image: '/image/app.jpg',
+        title: 'xxxxxxxxx',
+      })
+    }, 3000)
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

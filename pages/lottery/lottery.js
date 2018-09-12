@@ -15,6 +15,34 @@ Page({
   startLottery: function() {
     console.log('startLottery')
     this.setData({
+      awardStyle: ''
+    }, () => {
+      wx.request({
+        url: '/award/record',
+        data: '',
+        method: 'GET',
+        success: (res) => {
+          const { data, statusCode } = res;
+          if(!data.Code) {
+            wx.showToast({
+              title: '今天的抽奖次数用完啦，请明天再来吧！',
+            })
+            return;
+          }
+
+          wx.request({
+            url: '/award/lottery',
+            success: (res) => {
+              const { data } = res;
+              if(!data.Code) {
+                
+              }
+            }
+          })
+        }
+      })
+    })
+    this.setData({
       awardStyle: 'transform: rotate(1000deg);transition: transform 10s ease'
     })
   },
