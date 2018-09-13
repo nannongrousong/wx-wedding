@@ -1,4 +1,5 @@
 const app = getApp()
+const apiUrl = require('../../config/global.js').getApiUrl();
 
 //  弹幕背景颜色随机
 const getBgColor = () => {
@@ -102,7 +103,6 @@ Page({
       left: 150,
       portraitUrl: 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eooia3JcQ34x1oKpWPNkF5vX6MrS2BLhlX98tpibOlOVrekKrTO6FIHIVZiaoJaW8IhtWREcEduWgB6g/132'
     }];
-    console.log('testBarrageList', testBarrageList)
     //  设置弹幕初始left
     this.setData({
       barrageInitLeft: app.globalData.windowInfo.windowWidth,
@@ -110,9 +110,37 @@ Page({
     })
 
   },
-  getUserInfo: function(e) {
-    console.log(e)
+  getUserInfo: function(e) {    
     app.globalData.userInfo = e.detail.userInfo
+    // 登录
+    wx.login({
+      success: res => {
+        let { code } = res;
+        wx.request({
+          url: apiUrl.WX_LOGIN,
+          method: 'POST',
+          data: {
+            code,
+            nickName: e.detail.userInfo.nickName,
+            portraitUrl: e.detail.userInfo.avatarUrl
+          },
+          success: (res) => {
+            let resData = res.data;
+            if (resData.code) {
+              wx.setStorage({
+                key: 'TOKEN',
+                data: resData.data.token
+              })
+            } else {
+              wx.showModal({
+                title: '信息',
+                content: resData.info,
+              })
+            }
+          }
+        })
+      }
+    })
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true

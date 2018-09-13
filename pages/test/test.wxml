@@ -1,4 +1,0 @@
-<view>
-  {{name}}
-  <button bindtap='changeName'>换个名字吧</button>
-</view>

@@ -19,7 +19,11 @@ Component({
         hidden: true
       })
     },
-    bindSetting: function(res) {
+    bindGetUserInfo: function(res) {
+      
+
+      debugger;
+
       let settingRes = true;
       const {
         authSetting
@@ -33,6 +37,8 @@ Component({
         this.setData({
           hidden: true
         })
+
+
       } else {
         wx.showModal({
           content: '您取消授权后，就不能抽奖啦',

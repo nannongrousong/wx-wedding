@@ -1,8 +1,12 @@
+const apiUrl = require('../../config/global.js').getApiUrl();
+const app = getApp()
+
 Page({
   data: {
     awardList: [],
     awardStyle: '',
-    showAwardModal: false
+    showAwardModal: false,
+    showAuthModal: false
   },
   bindBackhome: () => {
     wx.navigateTo({
@@ -34,22 +38,29 @@ Page({
     }
   },
   startLottery: function() {
-    console.log('startLottery')
+    let token = wx.getStorageSync('TOKEN');
+    if(!token) {
+      this.setData({
+        showAuthModal: true
+      })
+      return;
+    }
     this.setData({
       awardStyle: ''
     }, () => {
       wx.request({
-        url: '/award/record',
-        data: '',
-        method: 'GET',
+        url: apiUrl.LIST_AWARD_RECORD,
+        data: {
+          token: app.globalData.token
+        },
         success: (res) => {
           const {
             data: resData,
             statusCode
           } = res;
-          if (!resData.Code) {
+          if (!resData.code) {
             wx.showModal({
-              content: resData.info,
+              content: resData.info || '',
               showCancel: false
             })
             return;
@@ -89,34 +100,44 @@ Page({
     })
   },
   onLoad: function(options) {
-    let awardList = [{
-        "award_id": 2,
-        "name": "2元红包",
-        "type": "local",
-        "icon": "gift"
-      }, {
-        name: '谢谢参与',
-        icon: 'smile-o'
-      },
-      {
-        "award_id": 4,
-        "name": "4元红包",
-        "type": "local",
-        "icon": "gift"
-      }, {
-        name: '谢谢参与',
-        icon: 'smile-o'
+    wx.request({
+      url: apiUrl.LIST_AWARD,
+      success: (res) => {
+        const {
+          data: resData
+        } = res;
+
+        if(!resData.code) {
+          wx.showModal({
+            title: '信息',
+            content: resData.info,
+          })
+          return;
+        }
+
+        let lastShowAwards = [];
+        resData.data.forEach((award) => {
+          lastShowAwards.push({
+            name: award.name,
+            icon: award.icon
+          })
+
+          lastShowAwards.push({
+            name: '谢谢参与',
+            icon: 'smile-o'
+          })
+        })
+
+        const count = lastShowAwards.length;
+        lastShowAwards.map((award, index) => {
+          award.lineDeg = -360 / count / 2 + (360 / count) * (index - 1);
+          award.awardDeg = -360 / count * index;
+        });
+
+        this.setData({
+          awardList: lastShowAwards
+        })
       }
-    ];
-
-    const count = awardList.length;
-    awardList.map((award, index) => {
-      award.lineDeg = -360 / count / 2 + (360 / count) * (index - 1);
-      award.awardDeg = -360 / count * index;
-    });
-
-    this.setData({
-      awardList
     })
   },
 

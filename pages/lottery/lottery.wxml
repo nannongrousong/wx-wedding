@@ -5,7 +5,7 @@
   </view>
 
   <view class='lottery-circle-big' style='{{awardStyle}}' bindtransitionend='bindEndCircle'>
-    <view wx:for="{{awardList}}">
+    <view wx:for="{{awardList}}" wx:key='award_id'>
       <view class='tray-line' style='transform:rotate({{item.lineDeg}}deg)'></view>
       <view class='tray-award' style='transform:rotate({{item.awardDeg}}deg)'>
         <text class='fa fa-{{item.icon}} award-icon'></text>
@@ -24,3 +24,6 @@
 
 <award-modal hidden='{{!showAwardModal}}' bindabandonaward='bindAbandonAward' bindsendaward='bindSendAward'>
 </award-modal>
+
+<auth-modal hidden='{{!showAuthModal}}'>
+</auth-modal>

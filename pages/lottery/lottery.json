@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "award-modal": "/component/awardModal/awardModal"
+    "award-modal": "/component/awardModal/awardModal",
+    "auth-modal": "/component/authModal/authModal"
   }
 }

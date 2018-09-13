@@ -9,10 +9,8 @@
   </view>
 
   <view class='barrage-wrapper'>
-    <view wx:for="{{barrageList}}">
-      <view class='barrage-item'>
-        <barrage barrageinfo='{{item}}' bindbarrageend='bindBarrageEnd' ></barrage>
-      </view>
+    <view wx:for="{{barrageList}}" wx:key='barrageID'>
+      <barrage barrageinfo='{{item}}' bindbarrageend='bindBarrageEnd'></barrage>
     </view>
   </view>
 
