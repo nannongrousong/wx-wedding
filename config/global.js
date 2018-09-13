@@ -7,7 +7,9 @@ const getApiUrl = () => {
   return {
     WX_LOGIN: apiPrefix + '/login/wx',
     LIST_AWARD: apiPrefix + '/award',
-    LIST_AWARD_RECORD: apiPrefix + '/award/record'
+    LIST_AWARD_RECORD: apiPrefix + '/award/record',
+    AWARD_LOTTERY: apiPrefix + '/award/lottery',
+    AWARD_MARK: apiPrefix + '/award/mark'
   }
 }
 

@@ -5,8 +5,7 @@ Page({
   data: {
     awardList: [],
     awardStyle: '',
-    showAwardModal: false,
-    showAuthModal: false
+    showAwardModal: false
   },
   bindBackhome: () => {
     wx.navigateTo({
@@ -20,31 +19,70 @@ Page({
   },
   bindSendAward: function (e) {
     const { phone } = e.detail;
-    console.log('bindSendAward.reamrk', phone)
+    wx.request({
+      url: apiUrl.AWARD_MARK,
+      method: 'POST',
+      data: {
+        token: app.globalData.token,
+        phone,
+        recordID: this.recordID//记得清空
+      },
+      success: (res) => {
+        let { data: resData } = res;
+        if(!resData.code) {
+          wx.showModal({
+            content: resData.info || '',
+            showCancel: false
+          })
+          return;
+        }
+
+        this.recordID = '';
+
+        wx.showModal({
+          content: '提交成功！预计三天日完成奖品发放！',
+          showCancel: false,
+          success: (res) => {
+            this.setData({
+              showAwardModal: false
+            })
+          }
+        })
+
+
+      }
+    })
   },
   bindEndCircle: function() {
-    let awardStr = wx.getStorageInfoSync('award');
-    wx.removeStorageSync('award')
+    let awardInfo = wx.getStorageSync('awardInfo');
+    wx.removeStorageSync('awardInfo')
 
     let awardName = '', recordID = '';
-    if (awardStr != undefined) {
-      let awardInfo = JSON.parse(awardStr)
+    if (awardInfo) {
       recordID = awardInfo.recordID;
       awardName = awardInfo.name;
     }
 
-    if (recordID != undefined && recordID != '') {
-      
+    if (recordID) {
+      this.recordID = recordID;
+      this.setData({
+        showAwardModal: true
+      })
+    } else {
+      wx.showToast({
+        title: '好可惜，再试试吧',
+      })
     }
+
   },
   startLottery: function() {
-    let token = wx.getStorageSync('TOKEN');
-    if(!token) {
-      this.setData({
-        showAuthModal: true
+    if(!app.globalData.token) {
+      wx.navigateTo({
+        url: '/pages/welcome/welcome?from=lottery'
       })
       return;
     }
+
     this.setData({
       awardStyle: ''
     }, () => {
@@ -66,27 +104,30 @@ Page({
             return;
           }
 
-          if (resData.data.canLottery) {
+          if (!resData.data.canLottery) {
             wx.showModal({
               content: '今天的抽奖次数用完啦，请明天再来吧！',
               showCancel: false
             })
           } else {
             wx.request({
-              url: '/award/lottery',
+              url: apiUrl.AWARD_LOTTERY,
+              data: {
+                token: app.globalData.token
+              },
               success: (res) => {
                 const {
                   data: resData
                 } = res;
-                if (!resData.Code) {
+                if (!resData.code) {
                   wx.showModal({
-                    content: resData.info,
+                    content: resData.info || '',
                     showCancel: false
                   })
                   return;
                 }
                 console.log('我要转转：' + resData.data.deg);
-                wx.setStorageSync('award', JSON.stringify(resData.data.award))
+                wx.setStorageSync('awardInfo', resData.data.award)
 
                 const lastDeg = 360 * 10 + resData.data.deg;
                 this.setData({

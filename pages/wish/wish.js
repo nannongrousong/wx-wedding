@@ -15,8 +15,6 @@ const getBestTop = (top) => {
 
 Page({
   data: {
-    userInfo: {},
-    hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     showAuthModal: false,
     barrageMode: false,
@@ -24,25 +22,9 @@ Page({
     barragepresentTop: 60,
     barrageInitLeft: 0
   },
-  bindSetting: function(a, b, c) {
-
-  },
   bindNavLottery: function() {
     wx.navigateTo({
       url: '../lottery/lottery',
-    })
-  },
-  bindNavSign: function() {
-    wx.getLocation({
-      type: 'gcj02',
-      success: (res) => {
-
-      },
-      fail: (res) => {
-        this.setData({
-          showAuthModal: true
-        })
-      }
     })
   },
   bindNavWish: function() {
@@ -65,36 +47,15 @@ Page({
     console.log('bindBarrageEnd.barrageID', barrageID)
   },
   bindSendBarrage: function() {
-    console.log('wish.bindSendBarrage')
+    if (!app.globalData.token) {
+      wx.navigateTo({
+        url: '/pages/welcome/welcome'
+      })
+      return;
+    }    
   }, 
-  onLoad: function() {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-
+  onLoad: function(options) {
+    console.log('options', options)
     let testBarrageList = [{
       barrageID: 1,
       text: '弹幕1222222',
@@ -107,43 +68,6 @@ Page({
     this.setData({
       barrageInitLeft: app.globalData.windowInfo.windowWidth,
       barrageList: testBarrageList
-    })
-
-  },
-  getUserInfo: function(e) {    
-    app.globalData.userInfo = e.detail.userInfo
-    // 登录
-    wx.login({
-      success: res => {
-        let { code } = res;
-        wx.request({
-          url: apiUrl.WX_LOGIN,
-          method: 'POST',
-          data: {
-            code,
-            nickName: e.detail.userInfo.nickName,
-            portraitUrl: e.detail.userInfo.avatarUrl
-          },
-          success: (res) => {
-            let resData = res.data;
-            if (resData.code) {
-              wx.setStorage({
-                key: 'TOKEN',
-                data: resData.data.token
-              })
-            } else {
-              wx.showModal({
-                title: '信息',
-                content: resData.info,
-              })
-            }
-          }
-        })
-      }
-    })
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
     })
   }
 })

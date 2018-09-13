@@ -24,6 +24,3 @@
 
 <award-modal hidden='{{!showAwardModal}}' bindabandonaward='bindAbandonAward' bindsendaward='bindSendAward'>
 </award-modal>
-
-<auth-modal hidden='{{!showAuthModal}}'>
-</auth-modal>

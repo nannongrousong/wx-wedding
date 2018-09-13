@@ -21,9 +21,20 @@ Component({
       if (!(/^1[3456789]\d{9}$/.test(phone))) {
         return;
       }
+
       this.triggerEvent('sendaward', {
         phone
-      });
+      })
+
+      /*
+      this.setData({
+        inputVal: ''
+      }, () => {
+        this.triggerEvent('sendaward', {
+          phone
+        })
+      })
+      */
     },
     bindCancel2: function() {
       this.setData({
@@ -35,6 +46,12 @@ Component({
     bindOK2: function() {
       this.setData({
         showConfirm: false
+      })
+    },
+    bindPhoneInput: function(e, b, c) {
+      console.log(e);
+      this.setData({
+        inputVal: e.detail.value
       })
     }
   }

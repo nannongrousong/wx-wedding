@@ -1,13 +1,4 @@
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-    <button open-type='openSetting' bindopensetting='bindSetting'>查看授权情况</button>
-  </view>
-
   <view class='barrage-wrapper'>
     <view wx:for="{{barrageList}}" wx:key='barrageID'>
       <barrage barrageinfo='{{item}}' bindbarrageend='bindBarrageEnd'></barrage>
@@ -29,10 +20,6 @@
       <view class='btn btn-lottery' bindtap='bindNavLottery'>
         <text class='fa fa-gift'></text>
         <text>抽奖</text>
-      </view>
-      <view class='btn btn-sign' bindtap='bindNavSign'>
-        <text class='fa fa-hand-peace-o'></text>
-        <text>签到</text>
       </view>
       <view class='btn btn-wish' bindtap='bindNavWish'>
         <text class='fa fa-heart'></text>
