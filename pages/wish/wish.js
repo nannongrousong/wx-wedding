@@ -56,6 +56,7 @@ Page({
   }, 
   onLoad: function(options) {
     console.log('options', options)
+    wx.setStorageSync('appFrom', options.from || '')
     let testBarrageList = [{
       barrageID: 1,
       text: '弹幕1222222',

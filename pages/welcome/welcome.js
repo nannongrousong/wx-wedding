@@ -21,7 +21,8 @@ Page({
             data: {
               code,
               nickName: e.detail.userInfo.nickName,
-              portraitUrl: e.detail.userInfo.avatarUrl
+              portraitUrl: e.detail.userInfo.avatarUrl,
+              sign: wx.getStorageSync('appFrom')
             },
             success: (res) => {
               let resData = res.data;
