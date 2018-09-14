@@ -107,7 +107,7 @@ Page({
     }
   },
   loadBarrageList: function() {
-    let lastST = wx.getStorageSync('lastST') || 0;
+    let lastST = wx.getStorageSync('lastST');
     wx.request({
       url: apiUrl.LIST_BARRAGE,
       data: {
