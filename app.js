@@ -5,7 +5,8 @@ App({
       success: (res) => {
         let {
           windowHeight,
-          windowWidth
+          windowWidth,
+          pixelRatio
         } = res;
         this.globalData.windowInfo = {
           windowHeight,
@@ -13,12 +14,6 @@ App({
         }
       }
     })
-    //  未登录时直接跳转至欢迎页
-    if(!this.globalData.userInfo) {
-      wx.navigateTo({
-        url: '/pages/welcome/welcome',
-      })
-    }
   },
   globalData: {
     userInfo: null,

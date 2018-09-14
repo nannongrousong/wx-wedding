@@ -1,4 +1,3 @@
-// component/barrage/barrage.js
 Component({
   properties: {
     barrageinfo: {
@@ -27,17 +26,12 @@ Component({
   ready: function() {
     console.log('attached')
     let initLeft = this.properties.barrageinfo.left;
-    let xEnd = (initLeft + 400) * -1;
-    /*
+    let xEnd = (initLeft + initLeft) * -1;
     const tempTimeID = setTimeout(() => {
       clearTimeout(tempTimeID);
       this.setData({
         transform: `translateX(${xEnd}px)`
       })
     }, 10);
-    */
-  },
-  detached: function() {
-    console.log('detached')
   }
 })

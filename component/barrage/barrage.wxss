@@ -1,9 +1,9 @@
 .barrage-item {
   position: fixed;
-  top: 100px;
+  top: 100rpx;
   cursor: pointer;
   white-space: nowrap;
-  transition: transform 4s linear;
+  transition: transform 8s linear;
 }
 
 .barrage-portrait {

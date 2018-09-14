@@ -48,8 +48,7 @@ Component({
         showConfirm: false
       })
     },
-    bindPhoneInput: function(e, b, c) {
-      console.log(e);
+    bindPhoneInput: function(e) {
       this.setData({
         inputVal: e.detail.value
       })

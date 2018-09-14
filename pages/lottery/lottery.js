@@ -1,5 +1,6 @@
 const apiUrl = require('../../config/global.js').getApiUrl();
 const app = getApp()
+const utils = require('../../utils/util.js');
 
 Page({
   data: {
@@ -12,28 +13,35 @@ Page({
       url: '../wish/wish',
     })
   },
-  bindAbandonAward: function () {
+  bindAbandonAward: function() {
     this.setData({
       showAwardModal: false
     })
   },
-  bindSendAward: function (e) {
-    const { phone } = e.detail;
+  bindSendAward: function(e) {
+    const {
+      phone
+    } = e.detail;
     wx.request({
       url: apiUrl.AWARD_MARK,
       method: 'POST',
       data: {
         token: app.globalData.token,
         phone,
-        recordID: this.recordID//记得清空
+        recordID: this.recordID //记得清空
       },
       success: (res) => {
-        let { data: resData } = res;
-        if(!resData.code) {
-          wx.showModal({
-            content: resData.info || '',
-            showCancel: false
-          })
+        let {
+          data: resData,
+          statusCode
+        } = res;
+        if (statusCode != 200) {
+          utils.justShowInfo(res.data)
+          return;
+        }
+
+        if (!resData.code) {
+          utils.justShowInfo(resData.info || '')
           return;
         }
 
@@ -48,8 +56,9 @@ Page({
             })
           }
         })
-
-
+      },
+      fail: (res) => {
+        utils.justShowInfo(res.errMsg)
       }
     })
   },
@@ -57,7 +66,8 @@ Page({
     let awardInfo = wx.getStorageSync('awardInfo');
     wx.removeStorageSync('awardInfo')
 
-    let awardName = '', recordID = '';
+    let awardName = '',
+      recordID = '';
     if (awardInfo) {
       recordID = awardInfo.recordID;
       awardName = awardInfo.name;
@@ -69,14 +79,12 @@ Page({
         showAwardModal: true
       })
     } else {
-      wx.showToast({
-        title: '好可惜，再试试吧',
-      })
+      utils.justShowInfo('好可惜，再试试吧')
     }
 
   },
   startLottery: function() {
-    if(!app.globalData.token) {
+    if (!app.globalData.token) {
       wx.navigateTo({
         url: '/pages/welcome/welcome?from=lottery'
       })
@@ -96,19 +104,19 @@ Page({
             data: resData,
             statusCode
           } = res;
+
+          if (statusCode != 200) {
+            utils.justShowInfo(res.data)
+            return;
+          }
+
           if (!resData.code) {
-            wx.showModal({
-              content: resData.info || '',
-              showCancel: false
-            })
+            utils.justShowInfo(resData.info || '')
             return;
           }
 
           if (!resData.data.canLottery) {
-            wx.showModal({
-              content: '今天的抽奖次数用完啦，请明天再来吧！',
-              showCancel: false
-            })
+            utils.justShowInfo('今天的抽奖次数用完啦，请明天再来吧！')
           } else {
             wx.request({
               url: apiUrl.AWARD_LOTTERY,
@@ -117,13 +125,17 @@ Page({
               },
               success: (res) => {
                 const {
-                  data: resData
+                  data: resData,
+                  statusCode
                 } = res;
+
+                if (statusCode != 200) {
+                  utils.justShowInfo(res.data)
+                  return;
+                }
+
                 if (!resData.code) {
-                  wx.showModal({
-                    content: resData.info || '',
-                    showCancel: false
-                  })
+                  utils.justShowInfo(resData.info || '')
                   return;
                 }
                 console.log('我要转转：' + resData.data.deg);
@@ -133,9 +145,15 @@ Page({
                 this.setData({
                   awardStyle: `transform: rotate(${lastDeg}deg);transition:transform 10s ease`
                 })
+              },
+              fail: (res) => {
+                utils.justShowInfo(res.errMsg)
               }
             })
           }
+        },
+        fail: (res) => {
+          utils.justShowInfo(res.errMsg)
         }
       })
     })
@@ -145,14 +163,17 @@ Page({
       url: apiUrl.LIST_AWARD,
       success: (res) => {
         const {
-          data: resData
+          data: resData,
+          statusCode
         } = res;
 
-        if(!resData.code) {
-          wx.showModal({
-            title: '信息',
-            content: resData.info,
-          })
+        if (statusCode != 200) {
+          utils.justShowInfo(res.data)
+          return;
+        }
+
+        if (!resData.code) {
+          utils.justShowInfo(res.info || '')
           return;
         }
 
@@ -178,6 +199,9 @@ Page({
         this.setData({
           awardList: lastShowAwards
         })
+      },
+      fail: (res) => {
+        utils.justShowInfo(res.errMsg)
       }
     })
   },

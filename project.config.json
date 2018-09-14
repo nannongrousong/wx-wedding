@@ -40,10 +40,10 @@
 			"current": 0,
 			"list": [
 				{
-					"id": -1,
-					"name": "hotel",
+					"id": 0,
+					"name": "jianhu",
 					"pathName": "pages/wish/wish",
-					"query": "from=hotel",
+					"query": "from=jianhu",
 					"scene": "1011"
 				}
 			]

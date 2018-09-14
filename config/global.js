@@ -9,7 +9,9 @@ const getApiUrl = () => {
     LIST_AWARD: apiPrefix + '/award',
     LIST_AWARD_RECORD: apiPrefix + '/award/record',
     AWARD_LOTTERY: apiPrefix + '/award/lottery',
-    AWARD_MARK: apiPrefix + '/award/mark'
+    AWARD_MARK: apiPrefix + '/award/mark',
+    LIST_BARRAGE: apiPrefix + '/barrage',
+    ADD_BARRAGE: apiPrefix + '/barrage'
   }
 }
 

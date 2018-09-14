@@ -1,10 +1,9 @@
 const app = getApp()
 const apiUrl = require('../../config/global.js').getApiUrl();
+const utils = require('../../utils/util.js');
 
 Page({
-  data: {
-    fromUrl: ''
-  },
+  data: {},
   bindGetUserInfo: function(e) {
     if (e.detail.userInfo) {
       //  授权成功
@@ -22,26 +21,30 @@ Page({
               code,
               nickName: e.detail.userInfo.nickName,
               portraitUrl: e.detail.userInfo.avatarUrl,
-              sign: wx.getStorageSync('appFrom')
+              signPosition: wx.getStorageSync('appFrom')
             },
             success: (res) => {
-              let resData = res.data;
+              const {
+                data: resData,
+                statusCode
+              } = res;
+
+              if (statusCode != 200) {
+                utils.justShowInfo(res.data)
+                return;
+              }
+
               if (resData.code) {
                 app.globalData.userInfo = e.detail.userInfo;
                 app.globalData.token = resData.data.token;
-                let backUrl = '/pages/wish/wish'
-                if (this.fromUrl == 'lottery') {
-                  backUrl = '/pages/lottery/lottery'
-                }
-                wx.navigateTo({
-                  url: backUrl
-                })
+
+                wx.navigateBack({})
               } else {
-                wx.showModal({
-                  title: '信息',
-                  content: resData.info,
-                })
+                utils.justShowInfo(resData.info || '')
               }
+            },
+            fail: (res) => {
+              utils.justShowInfo(res.errMsg)
             }
           })
         }
@@ -54,9 +57,7 @@ Page({
     }
 
   },
-  onLoad: function(options) {
-    this.fromUrl = options.from;
-  },
+  onLoad: function(options) {},
 
   /**
    * 生命周期函数--监听页面初次渲染完成

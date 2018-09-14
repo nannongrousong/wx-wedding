@@ -12,7 +12,7 @@
     <block wx:if='{{barrageMode}}'>
       <view class='barrage-input-area'>
         <text class='fa fa-navicon switch-button' bindtap='bindSwitchArea'></text>
-        <input class='barrage-input' placeholder='搞这玩意儿能找到女朋友吗？'></input>
+        <input class='barrage-input' placeholder='搞这玩意儿能找到女朋友吗？' bindinput='bindBarrageInput' value='{{barrageInput}}'></input>
         <text class='fa fa-arrow-circle-right send-barrage' bindtap='bindSendBarrage'></text>
       </view>
     </block>
