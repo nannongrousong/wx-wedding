@@ -6,11 +6,11 @@ Component({
     },
     removeBarrage: {
       type: Function,
-
     }
   },
   data: {
-    transform: ''
+    transform: '',
+    transition: ''
   },
   methods: {
     onLoad: function() {},
@@ -24,13 +24,17 @@ Component({
     }
   },
   ready: function() {
-    console.log('attached')
-    let initLeft = this.properties.barrageinfo.left;
-    let xEnd = (initLeft + initLeft) * -1;
+    let {
+      showTime,
+      left
+    } = this.properties.barrageinfo;
+
+    let xEnd = parseInt(left * 1.5 * -1);
     const tempTimeID = setTimeout(() => {
       clearTimeout(tempTimeID);
       this.setData({
-        transform: `translateX(${xEnd}px)`
+        transform: `translateX(${xEnd}px)`,
+        transition: `transform ${showTime}s linear`
       })
     }, 10);
   }

@@ -18,7 +18,7 @@ const getBarrageColor = () => {
 
 //  获取弹幕的最终高度
 const getBestTop = (top) => {
-  let clientHeight = app.globalData.windowInfo.windowHeight - 30;
+  let clientHeight = app.globalData.windowInfo.windowHeight - 60;
   return top % clientHeight;
 }
 
@@ -30,7 +30,7 @@ Page({
     barrageMode: false,
     barrageList: []
   },
-  bindBarrageInput: function() {
+  bindBarrageInput: function(e) {
     this.setData({
       barrageInput: e.detail.value
     })
@@ -91,6 +91,10 @@ Page({
 
         if(!resData.code) {
           utils.justShowInfo(resData.info || '')
+        } else {
+          this.setData({
+            barrageInput: ''
+          })
         }
       },
       fail: (res) => {
@@ -132,6 +136,10 @@ Page({
         let barrageList = resData.data;
         let showBarrageList = [];
 
+        //  重置位置
+        this.barragePresentLeft = app.globalData.windowInfo.windowWidth;
+        this.barrageShowTime = 8;
+
         barrageList.forEach((barrage) => {
           const {
             barrage_id,
@@ -143,15 +151,18 @@ Page({
             text,
             bgColor: getBarrageColor()[0],
             textColor: getBarrageColor()[1],
-            top: getBestTop(this.barragepresentTop),
-            left: app.globalData.windowInfo.windowWidth,
-            portraitUrl: portrait_url
+            top: getBestTop(this.barragePresentTop),
+            left: this.barragePresentLeft,
+            portraitUrl: portrait_url,
+            showTime: this.barrageShowTime
           })
-          this.barragepresentTop += 40
+          this.barragePresentTop += 40
+          this.barragePresentLeft += 40
+          this.barrageShowTime += 0.5
         })
 
         this.setData({
-          barrageList: showBarrageList
+          barrageList: [...this.data.barrageList, ...showBarrageList]
         }, () => {
           //  记录下最后一个弹幕时间，以供下次查询携带参数
           if (barrageList.length > 0) {
@@ -181,5 +192,7 @@ Page({
   onHide: function() {
     clearInterval(this.scheduleID);
   },
-  barragepresentTop: 20
+  barragePresentTop: 20,
+  barragePresentLeft: app.globalData.windowInfo.windowWidth,
+  barrageShowTime: 8
 })
