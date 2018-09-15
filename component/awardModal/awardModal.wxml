@@ -2,7 +2,7 @@
   <view class='auth-modal'>
     <view class='modal-mask'></view>
     <view class='modal-body'>
-      <view class='modal-title'>请输入手机号码</view>
+      <view class='modal-title'>中奖啦 请输入手机号码</view>
       <view class='modal-content'>
         <input class='modal-content-input' bindinput='bindPhoneInput' type='number' maxlength='11' value='{{inputVal}}'></input>
       </view>

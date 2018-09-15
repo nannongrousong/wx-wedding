@@ -1,6 +1,6 @@
-const isDebug = true;
+const isDebug = false;
 const debugApiPrefix = 'http://localhost:81';
-const onlineApiPrefix = '';
+const onlineApiPrefix = 'https://nannongrousong.xin/wedding/api';
 
 const getApiUrl = () => {
   const apiPrefix = isDebug ? debugApiPrefix : onlineApiPrefix;

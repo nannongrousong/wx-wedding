@@ -19,7 +19,7 @@
 .barrage-text {
   position: relative;
   vertical-align: middle;
-  padding: 4rpx 10rpx 4rpx 20rpx;
+  padding: 4rpx 10rpx 4rpx 30rpx;
   margin-left: -20rpx;
   max-width: 400rpx;
   text-overflow: ellipsis;

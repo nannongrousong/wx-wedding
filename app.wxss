@@ -1,9 +1,6 @@
 /**app.wxss**/
 @import "/style/font-awesome.wxss";
 
-page {
-  height: 100%;
-}
 
 .container {
   height: 100%;
@@ -14,7 +11,7 @@ page {
 .bottom-toolbar {
   position: fixed;
   bottom: 0;
-  padding: 10rpx 0;
+  padding: 10rpx 0 15rpx 0;
   width: 100%;
   display: flex;
   justify-content: space-around;

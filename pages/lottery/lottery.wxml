@@ -22,5 +22,6 @@
   </view>
 </view>
 
+<image src='https://nannongrousong-app-private.oss-cn-shanghai.aliyuncs.com/wedding/h5-background.jpg' class='img-background'></image>
 <award-modal hidden='{{!showAwardModal}}' bindabandonaward='bindAbandonAward' bindsendaward='bindSendAward'>
 </award-modal>

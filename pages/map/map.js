@@ -15,8 +15,10 @@ Page({
       height: 60,
       callout: {
         content: '我们结婚啦，玄武湖酒店。',
-        color: 'green',
-        display: 'ALWAYS'
+        color: '#F44336',
+        display: 'ALWAYS',
+        borderRadius: 5,
+        padding: 15
       }
     }]
   },

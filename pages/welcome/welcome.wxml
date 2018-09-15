@@ -1,6 +1,6 @@
 <view class='welcome'>
   <view>
-    <image class='app-logo' src='/image/app.jpg'></image>
+    <image class='app-logo' src='https://nannongrousong-app-private.oss-cn-shanghai.aliyuncs.com/wedding/wedding-logo.jpg'></image>
   </view>
   <text class='auth-tip-title'>
     婚礼进行曲申请获得以下权限：
