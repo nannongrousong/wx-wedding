@@ -1,9 +1,9 @@
 <view class='welcome'>
   <view>
-    <image class='app-logo' src='https://nannongrousong-app-private.oss-cn-shanghai.aliyuncs.com/wedding/wedding-logo.jpg'></image>
+    <image class='app-logo' src='https://cdn.nannongrousong.xin/wedding/h5/static/wedding-logo.jpg'></image>
   </view>
   <text class='auth-tip-title'>
-    婚礼进行曲申请获得以下权限：
+    浪漫婚礼曲申请获得以下权限：
   </text>
   <text class='auth-tip-content'>
     获得你的公开信息（昵称、头像等）

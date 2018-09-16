@@ -19,7 +19,7 @@ page2 {
   background-size: cover;
   background-attachment: fixed;
   background-color: #ccc;
-  background-image: url('https://nannongrousong-app-private.oss-cn-shanghai.aliyuncs.com/wedding/wedding-logo.jpg')
+  background-image: url('https://cdn.nannongrousong.xin/wedding/h5/static/wedding-logo.jpg')
 }
 
 .btn-lottery {

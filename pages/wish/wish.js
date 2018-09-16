@@ -115,7 +115,8 @@ Page({
     wx.request({
       url: apiUrl.LIST_BARRAGE,
       data: {
-        lastST
+        lastST,
+        _: new Date().getTime()
       },
       success: (res) => {
         const {

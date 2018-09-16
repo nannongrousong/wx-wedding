@@ -31,5 +31,5 @@
       </view>
     </block>
   </view>
-  <image src='https://nannongrousong-app-private.oss-cn-shanghai.aliyuncs.com/wedding/wedding-logo.jpg' class='img-background'></image>
+  <image src='https://cdn.nannongrousong.xin/wedding/h5/static/wedding-logo.jpg' class='img-background'></image>
 </view>
