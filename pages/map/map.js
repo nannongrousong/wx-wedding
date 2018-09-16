@@ -1,26 +1,10 @@
-// pages/map/map.js
+const apiUrl = require('../../config/global.js').getApiUrl();
+const utils = require('../../utils/util.js');
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    markers: [{
-      iconPath: "/image/map-tag.png",
-      id: 0,
-      title: '这是一个酒店',
-      latitude: 32.0721630000,
-      longitude: 118.7988230000,
-      width: 40,
-      height: 60,
-      callout: {
-        content: '我们结婚啦，玄武湖酒店。',
-        color: '#F44336',
-        display: 'ALWAYS',
-        borderRadius: 5,
-        padding: 15
-      }
-    }]
+    latitude: 32.0721630000,
+    longitude: 118.7988230000,
+    markers: null
   },
   bindBackhome: () => {
     wx.navigateTo({
@@ -28,7 +12,48 @@ Page({
     })
   },
   onLoad: function(options) {
+    wx.request({
+      url: apiUrl.GET_POSITION_INFO,
+      success: (res) => {
+        let {
+          data: resData,
+          statusCode
+        } = res;
+        if (statusCode != 200) {
+          utils.justShowInfo(res.data)
+          return;
+        }
 
+        if (!resData.code) {
+          utils.justShowInfo(resData.info || '')
+          return;
+        }
+
+        let { latitude, longitude, remark} = JSON.parse(resData.data);
+        this.setData({
+          latitude,
+          longitude,
+          markers: [{
+            iconPath: "/image/map-tag.png",
+            id: 0,
+            latitude,
+            longitude,
+            width: 40,
+            height: 60,
+            callout: {
+              content: remark,
+              color: '#F44336',
+              display: 'ALWAYS',
+              borderRadius: 5,
+              padding: 15
+            }
+          }]
+        })
+      },
+      fail: (res) => {
+        utils.justShowInfo(res.errMsg)
+      }
+    })
   },
 
   /**

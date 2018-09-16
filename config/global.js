@@ -11,7 +11,8 @@ const getApiUrl = () => {
     AWARD_LOTTERY: apiPrefix + '/award/lottery',
     AWARD_MARK: apiPrefix + '/award/mark',
     LIST_BARRAGE: apiPrefix + '/barrage',
-    ADD_BARRAGE: apiPrefix + '/barrage'
+    ADD_BARRAGE: apiPrefix + '/barrage',
+    GET_POSITION_INFO: apiPrefix + '/config?key=position_info'
   }
 }
 
