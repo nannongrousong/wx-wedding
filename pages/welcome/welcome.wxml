@@ -1,6 +1,6 @@
 <view class='welcome'>
   <view>
-    <image class='app-logo' src='https://nannongrousong.xin/wedding/h5/static/wedding-logo.jpg'></image>
+    <image class='app-logo' src='https://cdn.nannongrousong.xin/wedding/h5/static/wedding-logo.jpg'></image>
   </view>
   <text class='auth-tip-title'>
     浪漫婚礼曲申请获得以下权限：
